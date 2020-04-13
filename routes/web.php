@@ -28,13 +28,11 @@ Route::get('security/change/password', 'HomeController@password')->name('change.
 Route::post('password/authenticate', 'HomeController@newPassword')->name('new.password');
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
+Route::resource('record', 'RecordController');
+
 Route::get('admin/panel', function(){
     return view('component.admin.usermanagement.index');
 })->name('admin.index');
-
-Route::get('clerk', function(){
-    return view('component.clerk.index');
-})->name('clerk.index');
 
 Route::get('cos', function(){
     return view('component.cos.index');

@@ -5,6 +5,11 @@
 
 > **Version:** 7.4.1 , 7.5.2
 
+### Project Details
+|||
+|--|--|
+|Date Started|April 14, 2020|
+|Project Completion Date|April 30, 2020|
 
 ### Default System Credentials
 |Role|Email  | Password

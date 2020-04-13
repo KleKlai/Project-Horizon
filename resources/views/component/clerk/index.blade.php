@@ -16,7 +16,7 @@
     <div class="col-lg-12">
         <div class="card-box">
             <h3 class="header-title mt-0 mb-3">Documents Details</h3>
-            <a href="#addRecord" class="btn btn-info width-md waves-effect waves-light mb-3">
+            <a href="{{ route('record.create') }}" class="btn btn-info width-md waves-effect waves-light mb-3">
                 <i class="mdi mdi-plus-circle"></i>
                 Add Record
             </a>
@@ -37,12 +37,14 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>CTL-123456-GG</td>
-                        <td><span class="badge badge-success">NEW</span></td>
-                        <td>Sample Description</td>
-                        <td><a href="#showbtn"><i class="mdi mdi-fullscreen"></i> View</a></td>
-                    </tr>
+                    @foreach ($record as $data)
+                        <tr>
+                            <td>{!! $data->control_no !!}</td>
+                            <td><span class="badge badge-success">{!! $data->status !!}</span></td>
+                            <td>{!! $data->description !!}</td>
+                            <td><a href="{{ route('record.show', $data->uuid) }}"><i class="mdi mdi-fullscreen"></i> View</a></td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

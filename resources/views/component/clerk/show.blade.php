@@ -6,7 +6,7 @@
 <div class="row">
     <div class="col-xl-12">
         <div class="card-box project-box">
-            <div class="badge badge-success float-right font-13">NEW</div>
+            <div class="badge badge-success float-right font-13">{!! $record->status !!}</div>
 
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="javascript:goBack();">Receiving</a></li>
@@ -15,48 +15,48 @@
             <div class="form-row">
                 <div class="form-group col-md-3">
                     <label for="inputEmail4" class="col-form-label">Control Number</label>
-                    <input type="text" class="form-control" value="CTL-123456-GG" disabled>
+                    <input type="text" class="form-control" value="{!! $record->control_no !!}" disabled>
                 </div>
                 <div class="form-group col-md-2">
                     <label for="inputEmail4" class="col-form-label">Received Date</label>
-                    <input type="text" class="form-control" value="April 1, 2020" disabled>
+                    <input type="text" class="form-control" value="{!! $record->received_date !!}" disabled>
                 </div>
                 <div class="form-group col-md-2">
                     <label for="inputEmail4" class="col-form-label">Received Time</label>
-                    <input type="text" class="form-control" value="4:00 PM" disabled>
+                    <input type="text" class="form-control" value="{!! $record->received_time !!}" disabled>
                 </div>
                 <div class="form-group col-md-2">
                     <label for="inputEmail4" class="col-form-label">Due Date</label>
-                    <input type="text" class="form-control" value="April 17, 2020" disabled>
+                    <input type="text" class="form-control" value="{!! $record->deadline !!}" disabled>
                 </div>
                 <div class="form-group col-md-3">
                     <label for="inputEmail4" class="col-form-label">Source</label>
-                    <input type="text" class="form-control" value="Source Code" disabled>
+                    <input type="text" class="form-control" value="{!! $record->source !!}" disabled>
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group col-md-2">
                     <label for="inputEmail4" class="col-form-label">Document Type</label>
-                    <input type="text" class="form-control" value="jpg" disabled>
+                    <input type="text" class="form-control" value="{!! $record->document_type !!}" disabled>
                 </div>
                 <div class="form-group col-md-5">
                     <label for="inputEmail4" class="col-form-label">Department/Region</label>
-                    <input type="text" class="form-control" value="Department of Health" disabled>
+                    <input type="text" class="form-control" value="{!! $record->department_region !!}" disabled>
                 </div>
                 <div class="form-group col-md-2">
                     <label for="inputEmail4" class="col-form-label">Manner of Receipt</label>
-                    <input type="text" class="form-control" value="Email" disabled>
+                    <input type="text" class="form-control" value="{!! $record->manner_of_receipt !!}" disabled>
                 </div>
                 <div class="form-group col-md-3">
                     <label for="inputEmail4" class="col-form-label">Office/Province</label>
-                    <input type="text" class="form-control" value="Region XI Office" disabled>
+                    <input type="text" class="form-control" value="{!! $record->office_province !!}" disabled>
                 </div>
             </div>
 
             <div class="task-tags mt-2">
                 <h5>Description</h5>
-                <div class="bootstrap-tagsinput">Description Here</div>
+                <div class="bootstrap-tagsinput">{!! $record->description !!}</div>
             </div>
 
             <div class="attached-files mt-4">

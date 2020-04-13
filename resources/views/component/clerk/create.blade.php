@@ -22,53 +22,20 @@
 
 @section('content')
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-12">
         <div class="card-box">
+
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="javascript:goBack();">Receiving</a></li>
                 <li class="breadcrumb-item active">Library</li>
             </ol>
 
-            <form action="#linktoController" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('record.store') }}" method="POST" enctype="multipart/form-data">
 
                 @csrf
                 <div class="row form-group">
-                    <div class="form-group col-12 col-md-3">
-                        <label>Received Date</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control @error('received_date') is-invalid @enderror"
-                            name="received_date" placeholder="mm/dd/yyyy" value="{{ old('received_date') }}" id="datepicker-autoclose" required autocomplete="off">
-                            <div class="input-group-append">
-                                <span class="input-group-text"><i class="ti-calendar"></i></span>
-                            </div>
 
-                            @error('received_date')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="form-group col-12 col-md-3">
-                        <label>Received Time</label>
-                        <div class="input-group">
-                            <input id="timepicker" type="text" name="received_time" class="form-control @error('received_time') is-invalid @enderror"
-                            value="{{ old('received_time') }}" required autocomplete="off">
-
-                            <div class="input-group-append">
-                                <span class="input-group-text"><i class="mdi mdi-clock-outline"></i></span>
-                            </div>
-
-                            @error('received_time')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="form-group col-12 col-md-4">
+                    <div class="form-group col-12 col-md-2">
                         <label>Source</label>
 
                         <select class="form-control @error('source') is-invalid @enderror" name="source" required autocomplete="off" required>
@@ -103,11 +70,18 @@
                         @enderror
                     </div>
 
-                </div>
+                    <div class="form-group col-12 col-md-2">
+                        <label>Pages</label>
+                        <input type="number" name="pages" class="form-control @error('pages') is-invalid @enderror"  value="{{ old('pages') }}" autocomplete="off" required>
 
-                <div class="row form-group">
+                        @error('pages')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
 
-                    <div class="form-group col-12 col-md-4">
+                    <div class="form-group col-12 col-md-3">
                         <label>Document Type</label>
 
                         <select class="form-control select2 @error('document_type') is-invalid @enderror" name="document_type" required>
@@ -136,6 +110,39 @@
                             </span>
                         @enderror
                     </div>
+
+                    <div class="form-group col-12 col-md-3">
+                        <label>Document Type</label>
+
+                        <select class="form-control select2 @error('document_type') is-invalid @enderror" name="document_type" required>
+                            <option value="" selected>Select</option>
+                            <option value="Memorandum"
+                            {{ old('document_type') == 'Memorandum' ? 'selected' : '' }}>Memorandum</option>
+                            <option value="Letter/Request"
+                            {{ old('document_type') == 'Letter/Request' ? 'selected' : '' }}>Letter/Request</option>
+                            <option value="Subpoena"
+                            {{ old('document_type') == 'Subpoena' ? 'selected' : '' }}>Subpoena</option>
+                            <option value="Resolution/Minute Resolution"
+                            {{ old('document_type') == 'Resolution/Minute Resolution' ? 'selected' : '' }}>Resolution/Minute Resolution</option>
+                            <option value="Certification"
+                            {{ old('document_type') == 'Certification' ? 'selected' : '' }}>Certification</option>
+                            <option value="Appointment"
+                            {{ old('document_type') == 'Appointment' ? 'selected' : '' }}>Appointment</option>
+                            <option value="Clearance"
+                            {{ old('document_type') == 'Clearance' ? 'selected' : '' }}>Clearance</option>
+                            <option value="Newspaper"
+                            {{ old('document_type') == 'Newspaper' ? 'selected' : '' }}>Newspaper</option>
+                        </select>
+
+                        @error('document_type')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="row form-group">
 
                     <div class="form-group col-12 col-md-5">
                         <label>Department</label>
@@ -231,10 +238,6 @@
                         @enderror
                     </div>
 
-
-                </div>
-
-                <div class="row form-group">
                     <div class="form-group col-12 col-md-4">
                         <label>Office/Province</label>
 
@@ -249,11 +252,14 @@
                             </span>
                         @enderror
                     </div>
+                </div>
+
+                <div class="row form-group">
 
                     <div class="form-group col-12 col-md-8">
                         <label>Attachment Description</label>
 
-                        <textarea id="textarea" class="form-control @error('description') is-invalid @enderror" name="description" maxlength="300" rows="1"></textarea>
+                        <textarea id="textarea" class="form-control @error('description') is-invalid @enderror" name="description" maxlength="300" rows="5"></textarea>
 
                         @error('description')
                             <span class="invalid-feedback" role="alert">
@@ -261,17 +267,17 @@
                             </span>
                         @enderror
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label>Attachment</label>
-                    <input type="file" class="dropify @error('attachment') is-invalid @enderror" name="attachment" data-height="100" />
+                    <div class="form-group col-12 col-md-4">
+                        <label>Attachment</label>
+                        <input type="file" class="dropify @error('attachment') is-invalid @enderror" name="attachment" data-height="100" />
 
-                    @if($errors->has('attachment'))
-                        <span class="form-text text-danger" role="alert">
-                            <strong>{{ $errors->first('attachment') }}</strong>
-                        </span>
-                    @endif
+                        @if($errors->has('attachment'))
+                            <span class="form-text text-danger" role="alert">
+                                <strong>{{ $errors->first('attachment') }}</strong>
+                            </span>
+                        @endif
+                    </div>
                 </div>
 
                 <div class="text-right m-t-30">

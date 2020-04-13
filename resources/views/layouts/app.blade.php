@@ -196,7 +196,7 @@
 
                         @canany(['sys_admin_rights','clerk_rights'])
                         <li>
-                            <a href="{{ route('clerk.index') }}">
+                            <a href="{{ route('record.index') }}">
                                 <i class="mdi mdi-content-paste"></i>
                                 <span> Receiving</span>
                             </a>
