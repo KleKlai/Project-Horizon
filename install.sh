@@ -7,7 +7,14 @@ php artisan key:generate
 
 echo "======== Installation Finish ========"
 
-read -p "Do you want to serve (y/n)?" CONT
+read -p "Do you already add database credentials in your .env file? [y|n]?" CONT
+if [ "$CONT" = "y" ]; then
+  php artisan migrate:fresh --seed
+else
+  echo "Kindly add your database credentials in env file."
+fi
+
+read -p "Do you want to serve? [y|n]?" CONT
 if [ "$CONT" = "y" ]; then
   php artisan serve
 else
