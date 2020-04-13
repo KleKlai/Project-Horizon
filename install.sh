@@ -1,10 +1,9 @@
 echo "======== Initializing Installation ========"
-composer update
+# composer update
 composer install
 cp .env.example .env
 php artisan key:generate
-php artisan test
-php artisan optimize
+# php artisan optimize
 
 echo "======== Installation Finish ========"
 
