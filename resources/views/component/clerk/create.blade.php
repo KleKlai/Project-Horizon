@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('title', 'Receiving Section')
+
+@section('css')
 <!-- Plugins css -->
     <link href="{{ asset('admin/assets/libs/bootstrap-tagsinput/bootstrap-tagsinput.css') }}" rel="stylesheet" />
     <link href="{{ asset('admin/assets/libs/switchery/switchery.min.css') }}" rel="stylesheet" type="text/css" />
@@ -16,8 +18,6 @@
 
 <!-- dropify -->
     <link href="{{ asset('admin/assets/libs/dropify/dropify.min.css') }}" rel="stylesheet" type="text/css" />
-@section('css')
-
 @endsection
 
 @section('content')

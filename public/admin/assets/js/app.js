@@ -268,9 +268,9 @@ function ($) {
         });
 
         // activate the menu in left side bar based on url
-        $("#side-menu a").each(function () {
+        $(".navigation-menu a").each(function () {
             var pageUrl = window.location.href.split(/[?#]/)[0];
-            if (this.href == pageUrl) {
+            if (this.href == pageUrl) {  
                 $(this).addClass("active");
                 $(this).parent().addClass("active"); // add active to li of the current link
                 $(this).parent().parent().addClass("in");
@@ -285,6 +285,15 @@ function ($) {
         $('.navbar-toggle').on('click', function (event) {
             $(this).toggleClass('open');
             $('#navigation').slideToggle(400);
+        });
+
+        $('.navigation-menu>li').slice(-2).addClass('last-elements');
+
+        $('.navigation-menu li.has-submenu a[href="#"]').on('click', function (e) {
+            if ($(window).width() < 992) {
+                e.preventDefault();
+                $(this).parent('li').toggleClass('open').find('.submenu:first').toggleClass('open');
+            }
         });
 
         // Preloader

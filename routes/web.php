@@ -24,15 +24,14 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('security/change/password', 'HomeController@password')->name('change.password.index')->middleware(['auth','password.confirm']);
-Route::post('password/authenticate', 'HomeController@newPassword')->name('new.password');
+Route::get('profile', 'HomeController@profile')->name('myprofile.index')->middleware(['auth','password.confirm']);
+Route::put('profile/update/{user}', 'HomeController@updateProfile')->name('profile.update');
+Route::post('password/authenticate', 'HomeController@newPassword')->name('password.update');
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 Route::resource('record', 'RecordController');
 
-Route::get('admin/panel', function(){
-    return view('component.admin.usermanagement.index');
-})->name('admin.index');
+Route::resource('users', 'SysAdmin\UserController');
 
 Route::get('cos', function(){
     return view('component.cos.index');

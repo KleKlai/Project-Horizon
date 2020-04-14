@@ -8,10 +8,25 @@
 @endsection
 
 @section('content')
+<!-- start page title -->
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-12">
+        <div class="page-title-box">
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">Home</a></li>
+                    <li class="breadcrumb-item active">User Management</li>
+                </ol>
+            </div>
+            <h4 class="page-title">User Managament</h4>
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+<div class="row">
+    <div class="col-12">
         <div class="card-box">
-            <h4 class="mt-0 header-title"><b>User Management</b></h4>
 
             <table class="tablesaw table mb-0" data-tablesaw-mode="columntoggle">
                 <thead>
@@ -24,6 +39,7 @@
                 </tr>
                 </thead>
                 <tbody>
+
                     <tr>
                         <td>1</td>
                         <td>Maynard Magallen</td>

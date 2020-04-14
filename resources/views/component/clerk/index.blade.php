@@ -12,8 +12,24 @@
 @endsection
 
 @section('content')
+<!-- start page title -->
 <div class="row">
-    <div class="col-lg-12">
+    <div class="col-12">
+        <div class="page-title-box">
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+                    <li class="breadcrumb-item active">Document Receiving</li>
+                </ol>
+            </div>
+            <h4 class="page-title">Document Receiving</h4>
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+<div class="row">
+    <div class="col-12">
         <div class="card-box">
             <h3 class="header-title mt-0 mb-3">Documents Details</h3>
             <a href="{{ route('record.create') }}" class="btn btn-info width-md waves-effect waves-light mb-3">

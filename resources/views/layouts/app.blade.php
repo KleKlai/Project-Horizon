@@ -37,258 +37,200 @@
 
     <body>
 
-        <!-- Pre-loader -->
-        <div id="preloader">
-            <div id="status">
-                <div class="spinner">Loading...</div>
-            </div>
-        </div>
-        <!-- End Preloader-->
-
-        <!-- Begin page -->
-        <div id="wrapper">
+        <!-- Navigation Bar-->
+        <header id="topnav">
 
             <!-- Topbar Start -->
             <div class="navbar-custom">
-                <ul class="list-unstyled topnav-menu float-right mb-0">
+                <div class="container-fluid">
+                    <ul class="list-unstyled topnav-menu float-right mb-0">
 
+                        <li class="dropdown notification-list">
+                            <!-- Mobile menu toggle-->
+                            <a class="navbar-toggle nav-link">
+                                <div class="lines">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                            </a>
+                            <!-- End mobile menu toggle-->
+                        </li>
 
-<!-- Notification -->
-                    <li class="dropdown notification-list">
+                        <li class="dropdown notification-list">
+                            <a class="nav-link dropdown-toggle waves-effect" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                                <i class="fe-bell noti-icon"></i>
+                                <span class="badge badge-danger rounded-circle noti-icon-badge">9</span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right dropdown-lg">
 
-                        {{--  <a class="nav-link dropdown-toggle  waves-effect" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                            <i class="fe-bell noti-icon"></i>
-                            <span class="badge badge-danger rounded-circle noti-icon-badge">{{ auth()->user()->unreadNotifications()->count()  }}</span>
-                        </a>  --}}
-                        <div class="dropdown-menu dropdown-menu-right dropdown-lg">
+                                <!-- item-->
+                                <div class="dropdown-item noti-title">
+                                    <h5 class="m-0">
+                                        <span class="float-right">
+                                            <a href="" class="text-dark">
+                                                <small>Clear All</small>
+                                            </a>
+                                        </span>Notification
+                                    </h5>
+                                </div>
 
-                            {{--  <div class="dropdown-item noti-title">
-                                <h5 class="m-0">
-                                    <span class="float-right">
-                                        <a href="{{ route('markAllAsRead') }}" class="text-dark">
-                                            <small>Clear All</small>
-                                        </a>
-                                    </span>Notification
-                                </h5>
-                            </div>  --}}
+                                <div class="slimscroll noti-scroll">
 
-                            {{--  <div class="slimscroll noti-scroll">
-                                @forelse (auth()->user()->unreadNotifications as $notification)
                                     <!-- item-->
-                                    <a href="{{ route('markRead', $notification->id) }}" class="dropdown-item notify-item active" data-toggle="tooltip" data-placement="top" title="{{ $notification->created_at->format('F d, Y') }}">
-                                        <div class="notify-icon">
-                                            <img src="{{ asset('admin/assets/images/logo-sm.png') }}" class="img-fluid rounded-circle" alt="" />
+                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                        <div class="notify-icon bg-warning">
+                                            <i class="mdi mdi-account-plus"></i>
                                         </div>
-                                        <p class="notify-details font-13">{{ $notification->data['title'] .' '. $notification->data['data']}}</p>
-                                        <p class="text-muted mb-0 user-msg">
-                                            <small>{{ $notification->created_at->diffForHumans() }}</small>
+                                        <p class="notify-details">New user registered.
+                                            <small class="text-muted">5 hours ago</small>
                                         </p>
                                     </a>
-                                @empty
-                                    <div class="text-center">
-                                        <img src="{{ asset('admin/assets/images/vector/no-message-80x80.png') }}" alt="no-notification" class="mx-auto d-block">
-                                        <p class="notify-details">Looks like its empty</p>
-                                    </div>
-                                @endforelse
-                            </div>  --}}
 
-                            {{--  <!-- All-->
-                            <a href="{{ route('viewAllNotification') }}" class="dropdown-item text-center text-primary notify-item notify-all">
-                                View all
-                                <i class="fi-arrow-right"></i>
-                            </a>  --}}
+                                </div>
 
-                        </div>
-                    </li>
-
-                </ul>
-
-                <!-- LOGO -->
-                <div class="logo-box">
-                    <a href="{{ route('home') }}" class="logo text-center">
-                        {{-- <span class="logo-lg">
-                            <h5 class="text-center display-6">Document Tracker</h5>
-                        </span> --}}
-                        <span class="logo-sm">
-                            <!-- <span class="logo-sm-text-dark">X</span> -->
-                            <img src="{{ asset('admin/assets/images/logo-sm.png') }}" alt="" height="24">
-                        </span>
-                    </a>
-                </div>
-
-                <ul class="list-unstyled topnav-menu topnav-menu-left m-0">
-                    <li>
-                        <button class="button-menu-mobile disable-btn waves-effect">
-                            <i class="fe-menu"></i>
-                        </button>
-                    </li>
-
-                    <li>
-                        <h4 class="page-title-main">@yield('title')</h4>
-                    </li>
-
-                </ul>
-            </div>
-            <!-- end Topbar -->
-
-            <!-- ========== Left Sidebar Start ========== -->
-            <div class="left-side-menu">
-
-                <div class="slimscroll-menu">
-                    <!-- User box -->
-                    <div class="user-box text-center">
-                        <img src="{{ asset('admin/assets/images/default-avatar.png') }}" alt="user-avatar" title="Maynard Magallen" class="rounded-circle img-thumbnail avatar-xl">
-                        <div class="dropdown">
-                            <a href="#" class="text-dark dropdown-toggle h5 mt-2 mb-1 d-block" data-toggle="dropdown">{{ Auth::user()->name }}</a>
-                            <div class="dropdown-menu user-pro-dropdown">
-
-                                <a href="{{ route('change.password.index') }}" class="dropdown-item notify-item">
-                                    <i class="mdi mdi-shield-lock-outline mr-1"></i>
-                                    <span>Password</span>
+                                <!-- All-->
+                                <a href="javascript:void(0);" class="dropdown-item text-center text-primary notify-item notify-all">
+                                    View all
+                                    <i class="fi-arrow-right"></i>
                                 </a>
+
+                            </div>
+                        </li>
+
+                        <li class="dropdown notification-list">
+                            <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                                <img src="/storage/profile/{{ Auth::user()->profile }}" alt="user-image" class="rounded-circle">
+                                <span class="pro-user-name ml-1">
+                                    {{ Ucwords(Auth::user()->name) }} <i class="mdi mdi-chevron-down"></i>
+                                </span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
+
+                                <!-- item-->
+                                <a href="{{ route('myprofile.index') }}" class="dropdown-item notify-item">
+                                    <i class="fe-user"></i>
+                                    <span>My Profile</span>
+                                </a>
+
+                                <div class="dropdown-divider"></div>
 
                                 <!-- item-->
                                 <a href="{{ route('logout') }}" class="dropdown-item notify-item"
                                     onclick="event.preventDefault();
                                     document.getElementById('logout-form').submit();">
-                                    <i class="fe-log-out mr-1"></i>
-                                    <span>{{ __('Logout') }}</span>
+                                    <i class="fe-log-out"></i>
+                                    <span>Logout</span>
                                 </a>
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     @csrf
                                 </form>
-
                             </div>
-                        </div>
-                        <p class="text-muted">{{ Ucwords(Auth::user()->roles()->get()->pluck('name')->first()) }}</p>
-                        <ul class="list-inline">
-                            <li class="list-inline-item">
-                                <a href="{{ route('logout') }}" class="text-custom"
-                                    onclick="event.preventDefault();
-                                    document.getElementById('logout-form').submit();">
-                                    <i class="mdi mdi-power"></i>
-                                </a>
-                            </li>
-                        </ul>
+                        </li>
+
+                        <li class="dropdown notification-list">
+                            <a href="javascript:void(0);" class="nav-link right-bar-toggle waves-effect">
+                                <i class="fe-settings noti-icon"></i>
+                            </a>
+                        </li>
+
+                    </ul>
+
+                    <!-- LOGO -->
+                    <div class="logo-box">
+                        <a href="{{ route('home') }}" class="logo text-center">
+                            <span class="logo-lg">
+                                <img src="{{ asset('admin/assets/images/header.png') }}" alt="logo here" height="70">
+                                <!-- <span class="logo-lg-text-light">UBold</span> -->
+                            </span>
+                            <span class="logo-sm">
+                                <!-- <span class="logo-sm-text-dark">U</span> -->
+                                <img src="{{ asset('admin/assets/images/logo-sm.png') }}" alt="" height="24">
+                            </span>
+                        </a>
                     </div>
 
-                    <!--- Sidemenu -->
-                    <div id="sidebar-menu">
-
-                        <ul class="metismenu" id="side-menu">
-
-                        @can('sys_admin_rights')
-                        <li>
-                            <a href="{{ route('home') }}">
-                                <i class="mdi mdi-home"></i>
-                                <span> Dashboard</span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="{{ route('admin.index') }}">
-                                <i class="mdi mdi-account-group"></i>
-                                <span> User Management</span>
-                            </a>
-                        </li>
-                        @endcan
-
-                        @canany(['sys_admin_rights','clerk_rights'])
-                        <li>
-                            <a href="{{ route('record.index') }}">
-                                <i class="mdi mdi-content-paste"></i>
-                                <span> Receiving</span>
-                            </a>
-                        </li>
-                        @endcan
-
-                        @canany(['sys_admin_rights','cos_rights'])
-                        <li>
-                            <a href="{{ route('cos.index') }}">
-                                <i class="mdi mdi-content-paste"></i>
-                                <span> Assigning</span>
-                            </a>
-                        </li>
-                        @endcan
-
-                        @canany(['sys_admin_rights','admin_rights'])
-                        <li>
-                            <a href="{{ route('lawyer.index') }}">
-                                <i class="mdi mdi-content-paste"></i>
-                                <span> Admin | Lawyer Section</span>
-                            </a>
-                        </li>
-                        @endcan
-
-                        @canany(['sys_admin_rights','admin_head_rights'])
-                        <li>
-                            <a href="{{ route('adminhead.index') }}">
-                                <i class="mdi mdi-content-paste"></i>
-                                <span> Admin Head Section</span>
-                            </a>
-                        </li>
-                        @endcan
-
-                        </ul>
-
-                    </div>
-                    <!-- End Sidebar -->
-
-                    <div class="clearfix"></div>
-                    <!-- Sidebar -left -->
-
-                </div>
-                <!-- Sidebar -left -->
-
+                </div> <!-- end container-fluid-->
             </div>
-            <!-- Left Sidebar End -->
-
-            <!-- ============================================================== -->
-            <!-- Start Page Content here -->
-            <!-- ============================================================== -->
-
-            <div class="content-page">
-                <div class="content">
+            <!-- end Topbar -->
 
 
-                    @auth
-                        <!-- Start Content-->
-                        <div class="container-fluid">
-                            @yield('content')
-                        </div>
-                        <!-- container -->
-                    @endauth
-
-                </div> <!-- content -->
-
-            </div>
-
-            <!-- ============================================================== -->
-            <!-- End Page content -->
-            <!-- ============================================================== -->
-
-            <footer class="footer">
+            <div class="topbar-menu">
                 <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-6">
-                            © {{ date('Y') }} Office of Student and Development Service. All rights reserved.
-                        </div>
-                        {{--  <div class="col-md-6">
-                            <div class="text-md-right footer-links d-none d-sm-block">
-                                <a href="{{ route('about') }}">About Us</a>
-                                @can('user-privilege')
-                                    <a href="#import-data" data-animation="rotate" data-plugin="custommodal" data-overlayColor="#36404a">Feedback</a>
-                                @endcan
-                                <a href="javascript:void(0);" id="version">Version</a>
-                            </div>
-                        </div>  --}}
+                    <div id="navigation">
+                        <!-- Navigation Menu-->
+                        <ul class="navigation-menu">
+
+                            @include('layouts.navbar')
+
+                        </ul>
+                        <!-- End navigation menu -->
+
+                        <div class="clearfix"></div>
+                    </div>
+                    <!-- end #navigation -->
+                </div>
+                <!-- end container -->
+            </div>
+            <!-- end navbar-custom -->
+
+
+        </header>
+        <!-- End Navigation Bar-->
+
+        <!-- ============================================================== -->
+        <!-- Start Page Content here -->
+        <!-- ============================================================== -->
+
+        <div class="wrapper">
+            <div class="container-fluid">
+                @auth
+                    @yield('content')
+                @endauth
+            </div> <!-- end container -->
+        </div>
+        <!-- end wrapper -->
+
+        <!-- ============================================================== -->
+        <!-- End Page content -->
+        <!-- ============================================================== -->
+
+        <!-- Footer Start -->
+        <footer class="footer">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6">
+                        © {{ date('Y') }} Commission on Elections. All rights reserved.
                     </div>
                 </div>
-            </footer>
+            </div>
+        </footer>
+        <!-- end Footer -->
 
+        <!-- Right Sidebar -->
+        <div class="right-bar">
+            <div class="rightbar-title">
+                <a href="javascript:void(0);" class="right-bar-toggle float-right">
+                    <i class="dripicons-cross noti-icon"></i>
+                </a>
+                <h4 class="m-0 text-white">DocTracker</h4>
+            </div>
+            <div class="slimscroll-menu rightbar-content">
+                <!-- User box -->
+                <div class="user-box">
+                    <div class="user-img">
+                        <img src="/storage/profile/{{ Auth::user()->profile }}" alt="user-img" title="Maynard Magallen" class="rounded-circle img-fluid">
+                        <a href="{{ route('myprofile.index') }}" class="user-edit"><i class="mdi mdi-pencil"></i></a>
+                    </div>
+
+                    <h5><a href="javascript: void(0);">{{ Ucwords(Auth::user()->name) }}</a> </h5>
+                    <p class="text-muted mb-0"><small>{{ Ucwords(Auth::user()->roles()->get()->pluck('name')->first()) }}</small></p>
+                </div>
+
+            </div> <!-- end slimscroll-menu-->
         </div>
-        <!-- END wrapper -->
+        <!-- /Right-bar -->
 
 
         <!-- Right bar overlay-->
