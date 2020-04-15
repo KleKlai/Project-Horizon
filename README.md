@@ -39,3 +39,11 @@
 |Archive Record |✔️||✔️|||
 |Print Record||✔️|||✔️|
 |Upload New Document||||✔️||
+
+# Security
+
+If you discover a security vulnerability within this package, please send an e-mail to Maynard Magallen at mmagallen@klaiklai.tech. All security vulnerabilities will be promptly addressed.
+
+# License
+
+Document Tracking System is licensed under The MIT License (MIT).
