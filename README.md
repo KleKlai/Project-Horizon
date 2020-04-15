@@ -27,8 +27,8 @@ Lawyer					|lawyer@comelec.gov.ph  |bxtr1605
 Admin Head				|adminhead@comelec.gov.ph  |bxtr1605
 
 ## System Permission
-Permission |SysAdmin | Clerk | COS | Lawyer | Admin Head
---|--|--|--|--|--|
+Permission|SysAdmin|Clerk|COS|Lawyer|AdminHead
+--|--|--|--|--|--
 View Record|✔️|✔️|✔️|✔️|✔️
 Add Record|✔️|✔️|||
 Edit Record|✔️||||
