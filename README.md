@@ -27,24 +27,24 @@ Lawyer					|lawyer@comelec.gov.ph  |bxtr1605
 Admin Head				|adminhead@comelec.gov.ph  |bxtr1605
 
 ## System Permission
-|Permission |SysAdmin | Clerk | COS | Lawyer | Admin Head| 
-|--|--|--|--|--|--|
-|View Record|✔️|✔️|✔️|✔️|✔️|
-|Add Record|✔️|✔️||||
-|Edit Record|✔️|||||
-|Delete Rercord|✔️|||||
-|Add User|✔️|||||
-|Delete User|✔️||||
-|Edit User|✔️||||
-|Reassign User|✔️||||
-|Reassign Record|✔️||✔️|||
-|Archive Record |✔️||✔️|||
-|Assign Record|||✔️|||
-|Review Record|||✔️||✔️|
-|Reassign Record|✔️||✔️|||
-|Archive Record |✔️||✔️|||
-|Print Record||✔️|||✔️|
-|Upload New Document||||✔️||
+Permission |SysAdmin | Clerk | COS | Lawyer | Admin Head
+--|--|--|--|--|--
+View Record|✔️|✔️|✔️|✔️|✔️
+Add Record|✔️|✔️|||
+Edit Record|✔️||||
+Delete Rercord|✔️||||
+Add User|✔️||||
+Delete User|✔️|||
+Edit User|✔️|||
+Reassign User|✔️|||
+Reassign Record|✔️||✔️||
+Archive Record |✔️||✔️||
+Assign Record|||✔️||
+Review Record|||✔️||✔️
+Reassign Record|✔️||✔️||
+Archive Record |✔️||✔️||
+Print Record||✔️|||✔️
+Upload New Document||||✔️|
 
 # Security
 
