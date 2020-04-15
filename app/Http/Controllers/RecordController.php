@@ -7,14 +7,20 @@ use Illuminate\Http\Request;
 
 class RecordController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
+        // Prompt user if they are still using the old password
+        if(\Hash::check('bxtr1605', \Auth::user()->password)){
+            \Session::flash('swal_change_password', 'This account is using the default password, it is strongly recommended that you change your password.');
+        }
+
         $record = Record::select('uuid', 'control_no', 'status', 'description')->get();
+        // dd($record);
 
         return view('component.clerk.index', compact('record'));
     }
@@ -37,9 +43,7 @@ class RecordController extends Controller
      */
     public function store(Request $request)
     {
-
         $request->validate([
-            'received_time'     =>  'required',
             'source'            =>  'required',
             'deadline'          =>  'required | numeric',
             'pages'             =>  'required | numeric',
@@ -50,13 +54,14 @@ class RecordController extends Controller
             'description'       =>  'required',
         ]);
 
-        $request->request->add(['received_date' => date('F d, Y') ]);
         $request->request->add(['control_no' => mt_rand(1000000, 9999999)]);
         $request->request->add(['status' => 'NEW']);
+        $request->request->add(['received_date' => date('F d, Y') ]);
+        $request->request->add(['received_time' => date('h:i A') ]);
 
         Record::create($request->all());
 
-        \Session::flash('swal_success', 'Record encoded successfully.');
+        \Session::flash('toastr_success', 'Record encoded successfully.');
 
         return redirect(route('record.index'));
     }

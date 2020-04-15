@@ -15,6 +15,15 @@
         })
     @endif
 
+    @if(Session::has('swal_denied'))
+        Swal.fire({
+            type:"warning",
+            title: 'Access is Denied',
+            text:'{{ Session::get('swal_denied') }}',
+            confirmButtonClass:"btn btn-confirm mt-2"
+        })
+    @endif
+
     @if(Session::has('swal_change_password'))
         Swal.fire({
             type:"info",

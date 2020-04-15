@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Admin Head Section')
+@section('title', 'Activity Log')
 
 @section('css')
 <!-- third party css -->
@@ -18,13 +18,11 @@
         <div class="page-title-box">
             <div class="page-title-right">
                 <ol class="breadcrumb m-0">
-                    @can('sys_admin_rights')
-                        <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-                    @endcan
-                    <li class="breadcrumb-item active">Document Validation</li>
+                    <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+                    <li class="breadcrumb-item active">Activity Log</li>
                 </ol>
             </div>
-            <h4 class="page-title">Datatables</h4>
+            <h4 class="page-title">Activity Log</h4>
         </div>
     </div>
 </div>
@@ -33,30 +31,39 @@
 <div class="row">
     <div class="col-12">
         <div class="card-box">
-            <h3 class="header-title mt-0 mb-3">Documents Details</h3>
-
-            <table id="responsive-datatable" class="table table-bordered table-bordered dt-responsive nowrap">
+            <table id="key-table" class="table table-bordered dt-responsive nowrap">
                 <colgroup>
-                    <col span="1" style="width: 15%;">
+                    <col span="1" style="width: 3%;">
+                    <col span="1" style="width: 10%;">
                     <col span="1" style="width: 5%;">
+                    <col span="1" style="width: 10%;">
                     <col span="1" style="width: auto;">
+                    <col span="1" style="width: 5%;">
                     <col span="1" style="width: 5%;">
                 </colgroup>
                 <thead>
                     <tr>
-                        <th>Control Number</th>
-                        <th>Status</th>
-                        <th>Description</th>
+                        <th>#</th>
+                        <th>Date Time</th>
+                        <th>User</th>
+                        <th>Name</th>
                         <th>Action</th>
+                        <th>Item Type</th>
+                        <th>Affected</th>
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach($log as $activity)
                     <tr>
-                        <td>CTL-123456-GG</td>
-                        <td><span class="badge badge-success">Validate</span></td>
-                        <td>Test</td>
-                        <td><a href="#view"><i class="mdi mdi-fullscreen"></i> View</a></td>
+                        <td>{!! $activity->id !!}</td>
+                        <td>{!! $activity->created_at->format('M d, Y h:i A') !!}</td>
+                        <td>{!! $activity->causer_id !!}</td>
+                        <td>{!! $activity->log_name !!}</td>
+                        <td>{!! $activity->description !!}</td>
+                        <td>{!! $activity->subject_type !!}</td>
+                        <td>{!! $activity->subject_id !!}</td>
                     </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

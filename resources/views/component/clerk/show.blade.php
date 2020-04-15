@@ -3,16 +3,31 @@
 @section('title', 'Receiving Section')
 
 @section('content')
+<!-- start page title -->
 <div class="row">
-    <div class="col-xl-12">
-        <div class="card-box project-box">
+    <div class="col-12">
+        <div class="page-title-box">
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    @can('sys_admin_rights')
+                        <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+                    @endcan
+                    <li class="breadcrumb-item"><a href="{{ route('record.index') }}">Receiving</a></li>
+                    <li class="breadcrumb-item active">Record Details</li>
+                </ol>
+            </div>
+            <h4 class="page-title">Record Details</h4>
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+<div class="row">
+    <div class="col-12">
+        <div class="card-box">
             <div class="badge badge-success float-right font-13">{!! $record->status !!}</div>
 
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="javascript:goBack();">Receiving</a></li>
-                <li class="breadcrumb-item active">Show</li>
-            </ol>
-            <div class="form-row">
+            <div class="form-row mt-4">
                 <div class="form-group col-md-3">
                     <label for="inputEmail4" class="col-form-label">Control Number</label>
                     <input type="text" class="form-control" value="{!! $record->control_no !!}" disabled>

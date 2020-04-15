@@ -33,32 +33,34 @@
                 <tr>
                     <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="persist">#</th>
                     <th scope="col" data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="1">Name</th>
-                    <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="3">Username</th>
+                    <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="3">E-mail</th>
                     <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="2">Roles</th>
                     <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="4">Action</th>
                 </tr>
                 </thead>
                 <tbody>
 
-                    <tr>
-                        <td>1</td>
-                        <td>Maynard Magallen</td>
-                        <td>mmagallen</td>
-                        <td>System Administrator</td>
-                        <td>
-                            <form action="#deleteAction" method="POST">
+                    @foreach($user as $key => $users)
+                        <tr>
+                            <td>{{ $key+1 }}</td>
+                            <td>{{ $users->name }}</td>
+                            <td>{{ $users->email }}</td>
+                            <td>{{ $users->roles()->get()->pluck('name')->first() }}</td>
+                            <td>
+                                <form action="{{ route('users.destroy', $users) }}" method="POST">
 
-                                {{--  '@csrf' Verify if the form send by the user is came from server  --}}
-                                {{--  '{{ method_field('DELETE') }}' To change the http method  --}}
+                                    {{--  '@csrf' Verify if the form send by the user is came from server  --}}
+                                    {{--  '{{ method_field('DELETE') }}' To change the http method  --}}
 
-                                @csrf
-                                {{ method_field('DELETE') }}
+                                    @csrf
+                                    {{ method_field('DELETE') }}
 
-                                <a href="#editBtn" class="btn btn-link">Edit</button>
-                                <button type="submit" class="btn btn-danger btn-xs ml-2">Delete</button>
-                            </form>
-                        </td>
-                    </tr>
+                                    <a href="{{ route('users.edit', $users) }}" class="btn btn-link">Edit</button>
+                                    <button type="submit" data-id="{{$users->id}}" class="btn btn-danger btn-xs ml-2 delete-confirm">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
@@ -67,7 +69,6 @@
 @endsection
 
 @section('script')
-
 <!-- Tablesaw js -->
     <script src="{{ asset('admin/assets/libs/tablesaw/tablesaw.js') }}"></script>
 

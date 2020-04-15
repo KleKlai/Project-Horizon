@@ -37,4 +37,27 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    protected function authenticated($request, $user){
+
+
+
+        if($user->hasRole('System Adminstrator')){
+            return redirect(route('home'));
+        } else if($user->hasRole('Clerk')){
+
+            return redirect(route('record.index'));
+        } else if($user->hasRole('Chief of Staff')){
+
+            return view('component.cos.index');
+        } else if($user->hasRole('Lawyer')){
+
+            return view('component.lawyer.index');
+        } else if($user->hasRole('Admin Head')){
+
+            return view('component.adminhead.index');
+        } else {
+            return redirect(route('logout'));
+        }
+    }
 }

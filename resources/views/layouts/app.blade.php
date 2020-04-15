@@ -18,8 +18,7 @@
         <!-- App favicon -->
         <link rel="shortcut icon" href="{{ asset('admin/assets/images/favicon-16x16.png') }}">
 
-        <!-- Sweet Alert-->
-        <link href="{{ asset('admin/assets/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
+        @yield('css')
 
         <!-- App css -->
         <link href="{{ asset('admin/assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
@@ -32,7 +31,9 @@
         <!-- Custom box css -->
         <link href="{{ asset('admin/assets/libs/custombox/custombox.min.css') }}" rel="stylesheet">
 
-        @yield('css')
+        <!-- Sweet Alert-->
+        <link href="{{ asset('admin/assets/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
+
     </head>
 
     <body>

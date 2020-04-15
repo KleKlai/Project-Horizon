@@ -13,7 +13,7 @@
                     <li class="breadcrumb-item active">Authorization</li>
                 </ol>
             </div>
-            <h4 class="page-title">Authorization</h4>
+            <h4 class="page-title">Security Check</h4>
         </div>
     </div>
 </div>

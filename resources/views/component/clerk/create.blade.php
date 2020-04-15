@@ -1,7 +1,5 @@
 @extends('layouts.app')
 
-@section('title', 'Receiving Section')
-
 @section('css')
 <!-- Plugins css -->
     <link href="{{ asset('admin/assets/libs/bootstrap-tagsinput/bootstrap-tagsinput.css') }}" rel="stylesheet" />
@@ -21,14 +19,38 @@
 @endsection
 
 @section('content')
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box">
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    @can('sys_admin_rights')
+                        <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+                    @endcan
+                    <li class="breadcrumb-item"><a href="{{ route('record.index') }}">Receiving</a></li>
+                    <li class="breadcrumb-item active">New Record</li>
+                </ol>
+            </div>
+            <h4 class="page-title">New Record</h4>
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
 <div class="row">
     <div class="col-12">
         <div class="card-box">
 
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="javascript:goBack();">Receiving</a></li>
-                <li class="breadcrumb-item active">Library</li>
-            </ol>
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
             <form action="{{ route('record.store') }}" method="POST" enctype="multipart/form-data">
 

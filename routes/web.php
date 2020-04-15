@@ -32,6 +32,7 @@ Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::resource('record', 'RecordController');
 
 Route::resource('users', 'SysAdmin\UserController');
+Route::get('log', 'SysAdmin\UtilitiesController@activityLog')->name('log.index')->middleware('password.confirm');
 
 Route::get('cos', function(){
     return view('component.cos.index');
@@ -44,5 +45,11 @@ Route::get('lawyer', function(){
 Route::get('adminhead', function(){
     return view('component.adminhead.index');
 })->name('adminhead.index');
+
+Route::get('/maynard', function() {
+
+    Maynard::sayHello();
+
+});
 
 

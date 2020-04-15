@@ -1,7 +1,5 @@
 @extends('layouts.app')
 
-@section('title', 'Receiving Section')
-
 @section('css')
 <!-- third party css -->
         <link href="{{ asset('admin/assets/libs/datatables/dataTables.bootstrap4.css') }}" rel="stylesheet" type="text/css" />
@@ -18,8 +16,10 @@
         <div class="page-title-box">
             <div class="page-title-right">
                 <ol class="breadcrumb m-0">
-                    <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-                    <li class="breadcrumb-item active">Document Receiving</li>
+                    @can('sys_admin_rights')
+                        <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+                    @endcan
+                    <li class="breadcrumb-item active">Receiving</li>
                 </ol>
             </div>
             <h4 class="page-title">Document Receiving</h4>
@@ -31,7 +31,6 @@
 <div class="row">
     <div class="col-12">
         <div class="card-box">
-            <h3 class="header-title mt-0 mb-3">Documents Details</h3>
             <a href="{{ route('record.create') }}" class="btn btn-info width-md waves-effect waves-light mb-3">
                 <i class="mdi mdi-plus-circle"></i>
                 Add Record

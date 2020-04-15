@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Spatie\Activitylog\Models\Activity;
+use App\Model\Record;
 
 class HomeController extends Controller
 {
@@ -24,13 +26,23 @@ class HomeController extends Controller
      */
     public function index()
     {
-        \Session::flash('toastr_success', 'Test');
-        if(\Hash::check('bxtr1605', \Auth::user()->password)){
+        //If the current authenticated user has no permission of 'sys_admin_rights' send them back were do they belong.
+        if(\Gate::denies('sys_admin_rights')){
 
+            \Session::flash('swal_denied', 'You do not have enough access privileges for this page.');
+            return back();
+        }
+
+        // Prompt user if they are still using the old password
+        if(\Hash::check('bxtr1605', \Auth::user()->password)){
             \Session::flash('swal_change_password', 'This account is using the default password, it is strongly recommended that you change your password.');
         }
 
-        return view('home');
+        $users_count = User::all()->count();
+        $record_count = Record::all()->count();
+        $activity_log = Activity::with('causer')->orderBy('id', 'desc')->take(9)->get();
+
+        return view('home', compact(['activity_log', 'users_count', 'record_count']));
     }
 
     public function profile(){

@@ -15,6 +15,7 @@
         "laravel/framework": "^7.0",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
+        "spatie/laravel-activitylog": "^3.14",
         "webpatser/laravel-uuid": "^3.0"
     },
     "require-dev": {

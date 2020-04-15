@@ -4,12 +4,17 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 use Webpatser\Uuid\Uuid;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Record extends Model
 {
+    use LogsActivity;
+
     protected $guarded = [
         'id', 'created_at', 'updated_at',
     ];
+
+    protected static $logName = 'Record';
 
     public static function boot()
     {
