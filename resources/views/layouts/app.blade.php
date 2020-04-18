@@ -38,6 +38,14 @@
 
     <body>
 
+        <!-- Pre-loader -->
+        <div id="preloader">
+            <div id="status">
+                <div class="spinner">Loading...</div>
+            </div>
+        </div>
+        <!-- End Preloader-->
+
         <!-- Navigation Bar-->
         <header id="topnav">
 
@@ -56,47 +64,6 @@
                                 </div>
                             </a>
                             <!-- End mobile menu toggle-->
-                        </li>
-
-                        <li class="dropdown notification-list">
-                            <a class="nav-link dropdown-toggle waves-effect" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                                <i class="fe-bell noti-icon"></i>
-                                <span class="badge badge-danger rounded-circle noti-icon-badge">9</span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right dropdown-lg">
-
-                                <!-- item-->
-                                <div class="dropdown-item noti-title">
-                                    <h5 class="m-0">
-                                        <span class="float-right">
-                                            <a href="" class="text-dark">
-                                                <small>Clear All</small>
-                                            </a>
-                                        </span>Notification
-                                    </h5>
-                                </div>
-
-                                <div class="slimscroll noti-scroll">
-
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                        <div class="notify-icon bg-warning">
-                                            <i class="mdi mdi-account-plus"></i>
-                                        </div>
-                                        <p class="notify-details">New user registered.
-                                            <small class="text-muted">5 hours ago</small>
-                                        </p>
-                                    </a>
-
-                                </div>
-
-                                <!-- All-->
-                                <a href="javascript:void(0);" class="dropdown-item text-center text-primary notify-item notify-all">
-                                    View all
-                                    <i class="fi-arrow-right"></i>
-                                </a>
-
-                            </div>
                         </li>
 
                         <li class="dropdown notification-list">
@@ -132,7 +99,8 @@
 
                         <li class="dropdown notification-list">
                             <a href="javascript:void(0);" class="nav-link right-bar-toggle waves-effect">
-                                <i class="fe-settings noti-icon"></i>
+                                <i class="fe-bell noti-icon"></i>
+                                <span class="badge badge-danger rounded-circle noti-icon-badge">{{ auth()->user()->unreadNotifications()->count()  }}</span>
                             </a>
                         </li>
 
@@ -211,12 +179,12 @@
 
         <!-- Right Sidebar -->
         <div class="right-bar">
-            <div class="rightbar-title">
+            {{--  <div class="rightbar-title">
                 <a href="javascript:void(0);" class="right-bar-toggle float-right">
-                    <i class="dripicons-cross noti-icon"></i>
+                    <i class="dripicons-chevron-right"></i>
                 </a>
-                <h4 class="m-0 text-white">DocTracker</h4>
-            </div>
+
+            </div>  --}}
             <div class="slimscroll-menu rightbar-content">
                 <!-- User box -->
                 <div class="user-box">
@@ -228,6 +196,33 @@
                     <h5><a href="javascript: void(0);">{{ Ucwords(Auth::user()->name) }}</a> </h5>
                     <p class="text-muted mb-0"><small>{{ Ucwords(Auth::user()->roles()->get()->pluck('name')->first()) }}</small></p>
                 </div>
+
+                <!-- Timeline -->
+                <hr class="mt-0" />
+                <h5 class="pl-3 pr-3">Notification <span class="float-right">
+                    <a href="{{ route('markAllAsRead') }}" class="text-dark">
+                        <small>Clear All</small>
+                    </a></span>
+                </h5>
+                <hr class="mb-0" />
+                <div class="p-3">
+                    <div class="inbox-widget">
+                        @forelse (auth()->user()->unreadNotifications as $notification)
+                            <a href="{{ route('markRead', $notification) }}">
+                                <div class="inbox-item">
+                                    <small class="float-right">{{ $notification->created_at->diffForHumans() }}</small>
+                                    <p class="inbox-item-author text-dark">{{ $notification->data['title'] }}</p>
+                                    <p class="inbox-item-text">{{ $notification->data['data'] }}</p>
+                                </div>
+                            </a>
+                        @empty
+                            <div class="inbox-item text-center">
+                                <img src="{{ asset('admin/assets/images/vector/notification.svg') }}" class="mx-auto d-block" width="50vi">
+                                <p class="notify-details mt-2">No notifications yet!</p>
+                            </div>
+                        @endforelse
+                    </div> <!-- end inbox-widget -->
+                </div> <!-- end .p-3-->
 
             </div> <!-- end slimscroll-menu-->
         </div>

@@ -82,4 +82,10 @@ class User extends Authenticatable
         }
         return false;
     }
+
+    public function attorney()
+    {
+        return $this->belongsToMany(Attorney::class);
+    }
+
 }

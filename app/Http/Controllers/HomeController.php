@@ -40,9 +40,11 @@ class HomeController extends Controller
 
         $users_count = User::all()->count();
         $record_count = Record::all()->count();
+        $verification_count = Record::where('status', 'For Review')->count();
+        $done_count = Record::where('status', 'Done')->count();
         $activity_log = Activity::with('causer')->orderBy('id', 'desc')->take(9)->get();
 
-        return view('home', compact(['activity_log', 'users_count', 'record_count']));
+        return view('home', compact(['activity_log', 'users_count', 'record_count','verification_count', 'done_count']));
     }
 
     public function profile(){

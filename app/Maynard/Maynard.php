@@ -2,6 +2,7 @@
 
 namespace App\Maynard;
 use App\User;
+use Auth;
 
 class Maynard
 {
@@ -74,13 +75,24 @@ class Maynard
 
     public static function systemNotification(int $receiver, string $title, string $message)
     {
-        $user = User::find($this->receiver);
+        $user = User::findOrFail($receiver);
 
         $details = [
-            'header' => $this->$title,
-            'body' => $this->message,
+            'header' => $title,
+            'body' => $message,
         ];
 
         $user->notify(new \App\Notifications\SystemNotification($details));
+    }
+
+    public static function markAsRead()
+    {
+        auth()->user()->unreadNotifications->markAsRead();
+
+    }
+
+    public static function markRead($id)
+    {
+        auth()->user()->unreadNotifications->where('id',$id)->markAsRead();
     }
 }

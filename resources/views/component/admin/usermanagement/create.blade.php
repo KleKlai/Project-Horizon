@@ -87,7 +87,7 @@
                             </select>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Sign in</button>
+                        <button type="submit" class="btn btn-primary">Create</button>
                     </form>
                 </div>
             </div>

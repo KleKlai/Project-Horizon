@@ -15,14 +15,31 @@
 @endsection
 
 @section('content')
+<!-- start page title -->
 <div class="row">
-    <div class="col-lg-12">
+    <div class="col-12">
+        <div class="page-title-box">
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    @can('sys_admin_rights')
+                    <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+                    @endcan
+                    <li class="breadcrumb-item active">Record</li>
+                </ol>
+            </div>
+            <h4 class="page-title">Record</h4>
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+<div class="row">
+    <div class="col-md-12">
         <div class="card-box">
-            <h3 class="header-title mt-0 mb-3">Documents Details</h3>
 
             <table id="responsive-datatable" class="table table-bordered table-bordered dt-responsive nowrap">
                 <colgroup>
-                    <col span="1" style="width: 20%;">
+                    <col span="1" style="width: 5%;">
+                    <col span="1" style="width: 10%;">
                     <col span="1" style="width: 5%;">
                     <col span="1" style="width: auto;">
                     <col span="1" style="width: 8%;">
@@ -32,29 +49,28 @@
                     <tr>
                         <th>Control Number</th>
                         <th>Status</th>
-                        <th>Assigned Person</th>
+                        <th>Source</th>
+                        <th>Department/Region</th>
                         <th>Due Date</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>CTL-123456-GG</td>
-                        <td class="text-center"><span class="badge badge-success">NEW</span></td>
-                        <td>Maynard Magallen</td>
-                        <td>3 Days</td>
-                        <td>
-                            <a href="#import-data" class="btn btn-success waves-effect waves-light"
-                            data-animation="rotate" data-plugin="custommodal" data-overlayColor="#36404a">
-                                <i class="mdi mdi-cube-send"></i>
-                                Assign
-                            </a>
-                            <a href="#showBtn" class="btn btn-link waves-effect waves-light">
-                                <i class="mdi mdi-fullscreen"></i>
-                                View
-                            </a>
-                        </td>
-                    </tr>
+                    @foreach($record as $case)
+                        <tr>
+                            <td>{!! $case->control_no !!}</td>
+                            <td class="text-center"><span class="badge badge-{!! $case->status_color !!}">{!! $case->status !!}</span></td>
+                            <td>{!! $case->source !!}</td>
+                            <td>{!! Str::limit($case->department_region, 90) !!}</td>
+                            <td>{!! $case->deadline !!} Days</td>
+                            <td>
+                                <a href="{{ route('record.show', $case) }}" class="btn-link">
+                                    <i class="mdi mdi-fullscreen"></i>
+                                    View
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

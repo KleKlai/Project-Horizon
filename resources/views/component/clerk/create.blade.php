@@ -16,6 +16,8 @@
 
 <!-- dropify -->
     <link href="{{ asset('admin/assets/libs/dropify/dropify.min.css') }}" rel="stylesheet" type="text/css" />
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.css" rel="stylesheet" />
 @endsection
 
 @section('content')
@@ -58,6 +60,41 @@
                 <div class="row form-group">
 
                     <div class="form-group col-12 col-md-2">
+                        <label>Received Date</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control @error('received_date') is-invalid @enderror"
+                            name="received_date" placeholder="mm/dd/yyyy" value="{{ old('received_date') }}" id="datepicker-autoclose" required autocomplete="off">
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="ti-calendar"></i></span>
+                            </div>
+
+                            @error('received_date')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group col-12 col-md-2">
+                        <label>Received Time</label>
+                        <div class="input-group">
+                            <input id="timepicker" type="text" name="received_time" class="form-control @error('received_time') is-invalid @enderror"
+                            value="{{ old('received_time') }}" required autocomplete="off">
+
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="mdi mdi-clock-outline"></i></span>
+                            </div>
+
+                            @error('received_time')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group col-12 col-md-2">
                         <label>Source</label>
 
                         <select class="form-control @error('source') is-invalid @enderror" name="source" required autocomplete="off" required>
@@ -92,41 +129,11 @@
                         @enderror
                     </div>
 
-                    <div class="form-group col-12 col-md-2">
+                    <div class="form-group col-12 col-md-1">
                         <label>Pages</label>
                         <input type="number" name="pages" class="form-control @error('pages') is-invalid @enderror"  value="{{ old('pages') }}" autocomplete="off" required>
 
                         @error('pages')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-
-                    <div class="form-group col-12 col-md-3">
-                        <label>Document Type</label>
-
-                        <select class="form-control select2 @error('document_type') is-invalid @enderror" name="document_type" required>
-                            <option value="" selected>Select</option>
-                            <option value="Memorandum"
-                            {{ old('document_type') == 'Memorandum' ? 'selected' : '' }}>Memorandum</option>
-                            <option value="Letter/Request"
-                            {{ old('document_type') == 'Letter/Request' ? 'selected' : '' }}>Letter/Request</option>
-                            <option value="Subpoena"
-                            {{ old('document_type') == 'Subpoena' ? 'selected' : '' }}>Subpoena</option>
-                            <option value="Resolution/Minute Resolution"
-                            {{ old('document_type') == 'Resolution/Minute Resolution' ? 'selected' : '' }}>Resolution/Minute Resolution</option>
-                            <option value="Certification"
-                            {{ old('document_type') == 'Certification' ? 'selected' : '' }}>Certification</option>
-                            <option value="Appointment"
-                            {{ old('document_type') == 'Appointment' ? 'selected' : '' }}>Appointment</option>
-                            <option value="Clearance"
-                            {{ old('document_type') == 'Clearance' ? 'selected' : '' }}>Clearance</option>
-                            <option value="Newspaper"
-                            {{ old('document_type') == 'Newspaper' ? 'selected' : '' }}>Newspaper</option>
-                        </select>
-
-                        @error('document_type')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -278,10 +285,10 @@
 
                 <div class="row form-group">
 
-                    <div class="form-group col-12 col-md-8">
-                        <label>Attachment Description</label>
+                    <div class="form-group col-12 col-md-12">
+                        <label>Description</label>
 
-                        <textarea id="textarea" class="form-control @error('description') is-invalid @enderror" name="description" maxlength="300" rows="5"></textarea>
+                        <textarea id="textarea" class="form-control @error('description') is-invalid @enderror" name="description" maxlength="300" rows="3"></textarea>
 
                         @error('description')
                             <span class="invalid-feedback" role="alert">
@@ -290,17 +297,16 @@
                         @enderror
                     </div>
 
-                    <div class="form-group col-12 col-md-4">
-                        <label>Attachment</label>
-                        <input type="file" class="dropify @error('attachment') is-invalid @enderror" name="attachment" data-height="100" />
+                </div>
 
-                        @if($errors->has('attachment'))
-                            <span class="form-text text-danger" role="alert">
-                                <strong>{{ $errors->first('attachment') }}</strong>
-                            </span>
-                        @endif
+
+                <div class="form-group">
+                    <label for="document">Documents</label>
+                    <div class="needsclick dropzone" id="document-dropzone">
+
                     </div>
                 </div>
+
 
                 <div class="text-right m-t-30">
                     <button type="submit" class="btn btn-success waves-effect waves-light">
@@ -338,4 +344,43 @@
 
 <!-- form-upload init -->
     <script src="{{ asset('admin/assets/js/pages/form-fileupload.init.js') }}"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.js"></script>
+    <script>
+        var uploadedDocumentMap = {}
+        Dropzone.options.documentDropzone = {
+          url: '{{ route('record.media') }}',
+          maxFilesize: 2, // MB
+          addRemoveLinks: true,
+          headers: {
+            'X-CSRF-TOKEN': "{{ csrf_token() }}"
+          },
+          success: function (file, response) {
+            $('form').append('<input type="hidden" name="document[]" value="' + response.name + '">')
+            uploadedDocumentMap[file.name] = response.name
+          },
+          removedfile: function (file) {
+            file.previewElement.remove()
+            var name = ''
+            if (typeof file.file_name !== 'undefined') {
+              name = file.file_name
+            } else {
+              name = uploadedDocumentMap[file.name]
+            }
+            $('form').find('input[name="document[]"][value="' + name + '"]').remove()
+          },
+          init: function () {
+            @if(isset($project) && $project->document)
+              var files =
+                {!! json_encode($project->document) !!}
+              for (var i in files) {
+                var file = files[i]
+                this.options.addedfile.call(this, file)
+                file.previewElement.classList.add('dz-complete')
+                $('form').append('<input type="hidden" name="document[]" value="' + file.file_name + '">')
+              }
+            @endif
+          }
+        }
+      </script>
 @endsection

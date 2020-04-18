@@ -39,14 +39,14 @@
 
         <div class="card-box widget-user">
             <div class="text-center">
-                <h2 class="font-weight-normal text-warning" data-plugin="counterup">452</h2>
+                <h2 class="font-weight-normal text-warning" data-plugin="counterup">{!! $verification_count !!}</h2>
                 <h5>Pending Validation</h5>
             </div>
         </div>
 
         <div class="card-box widget-user">
             <div class="text-center">
-                <h2 class="font-weight-normal text-success" data-plugin="counterup">1254</h2>
+                <h2 class="font-weight-normal text-success" data-plugin="counterup">{!! $done_count !!}</h2>
                 <h5>Report Completed</h5>
             </div>
         </div>

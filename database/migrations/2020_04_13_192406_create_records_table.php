@@ -18,7 +18,7 @@ class CreateRecordsTable extends Migration
             $table->uuid('uuid');
             $table->string('control_no');
             $table->string('status');
-            $table->string('assigned_person')->nullable();
+            $table->string('status_color');
             $table->string('received_date');
             $table->string('received_time');
             $table->string('source');
@@ -29,6 +29,9 @@ class CreateRecordsTable extends Migration
             $table->string('manner_of_receipt');
             $table->string('office_province');
             $table->string('description');
+            $table->boolean('submission')->default(0);
+            $table->mediumText('disapproved_remark')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

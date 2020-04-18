@@ -16,9 +16,9 @@ class SystemNotification extends Notification
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($details)
     {
-        //
+        $this->details = $details;
     }
 
     /**
@@ -29,7 +29,7 @@ class SystemNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['database'];
     }
 
     /**
@@ -44,6 +44,14 @@ class SystemNotification extends Notification
                     ->line('The introduction to the notification.')
                     ->action('Notification Action', url('/'))
                     ->line('Thank you for using our application!');
+    }
+
+    public function toDatabase($notifiable)
+    {
+        return [
+            'title' => $this->details['header'],
+            'data' => $this->details['body']
+         ];
     }
 
     /**

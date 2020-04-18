@@ -24,6 +24,14 @@
         })
     @endif
 
+    @if(Session::has('swal_info'))
+        Swal.fire({
+            type:"info",
+            text:'{{ Session::get('swal_info') }}',
+            confirmButtonClass:"btn btn-confirm mt-2"
+        })
+    @endif
+
     @if(Session::has('swal_change_password'))
         Swal.fire({
             type:"info",

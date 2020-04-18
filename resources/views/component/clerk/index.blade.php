@@ -55,8 +55,8 @@
                     @foreach ($record as $data)
                         <tr>
                             <td>{!! $data->control_no !!}</td>
-                            <td><span class="badge badge-success">{!! $data->status !!}</span></td>
-                            <td>{!! $data->description !!}</td>
+                            <td><span class="badge badge-{!! $data->status_color !!}">{!! $data->status !!}</span></td>
+                            <td>{!! Str::limit($data->description, 80) !!}</td>
                             <td><a href="{{ route('record.show', $data->uuid) }}"><i class="mdi mdi-fullscreen"></i> View</a></td>
                         </tr>
                     @endforeach

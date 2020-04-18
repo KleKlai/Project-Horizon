@@ -23,19 +23,19 @@
 
 @canany(['sys_admin_rights', 'cos_rights'])
 <li class="has-submenu">
-    <a href="#"><i class="mdi mdi-gavel"></i>Assigning</a>
+    <a href="{{ route('cos.index') }}"><i class="mdi mdi-gavel"></i>Assigning</a>
 </li>
 @endcan
 
 @canany(['sys_admin_rights', 'lawyer_rights'])
 <li class="has-submenu">
-    <a href="#"><i class="mdi mdi-feather"></i>Resolution</a>
+    <a href="{{ route('attorney.index') }}"><i class="mdi mdi-feather"></i>Resolution</a>
 </li>
 @endcan
 
 @canany(['sys_admin_rights', 'admin_head_rights'])
 <li class="has-submenu">
-    <a href="#"><i class="mdi mdi-shield-check"></i>Validation</a>
+    <a href="{{ route('adminhead.index') }}"><i class="mdi mdi-shield-check"></i>Validation</a>
 </li>
 @endcan
 
