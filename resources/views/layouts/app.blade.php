@@ -68,7 +68,7 @@
 
                         <li class="dropdown notification-list">
                             <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                                <img src="/storage/profile/{{ Auth::user()->profile }}" alt="user-image" class="rounded-circle">
+                                <img src="{{ asset('storage\\profile\\').Auth::user()->profile }}" alt="user-image" class="rounded-circle">
                                 <span class="pro-user-name ml-1">
                                     {{ Ucwords(Auth::user()->name) }} <i class="mdi mdi-chevron-down"></i>
                                 </span>
@@ -189,7 +189,7 @@
                 <!-- User box -->
                 <div class="user-box">
                     <div class="user-img">
-                        <img src="/storage/profile/{{ Auth::user()->profile }}" alt="user-img" title="Maynard Magallen" class="rounded-circle img-fluid">
+                        <img src="{{ asset('storage\\profile\\').Auth::user()->profile }}" alt="user-img" title="Maynard Magallen" class="rounded-circle img-fluid">
                         <a href="{{ route('myprofile.index') }}" class="user-edit"><i class="mdi mdi-pencil"></i></a>
                     </div>
 

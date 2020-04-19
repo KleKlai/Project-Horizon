@@ -163,7 +163,6 @@
                         </div>
                     </div>
                 </form>
-
             @endcan
 
             <div class="task-tags mt-2">

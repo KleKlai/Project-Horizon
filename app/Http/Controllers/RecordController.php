@@ -90,7 +90,7 @@ class RecordController extends Controller
     public function show(Record $record)
     {
         $attorney = Role::where('name', 'Lawyer')->first()->users()->get();
-        // dd($record);
+
         return view('component.clerk.show', compact(['record', 'attorney']));
     }
 

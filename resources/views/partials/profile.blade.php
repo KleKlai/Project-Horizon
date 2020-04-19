@@ -29,7 +29,7 @@
 
             <div class="row justify-content-center">
                 <div class="col-sm-4">
-                    <img src="/storage/profile/{{ Auth::user()->profile ?? 'default-avatar.png' }}"
+                    <img src="{{ asset('storage\\profile\\').Auth::user()->profile ?? 'default-avatar.png' }}"
                     class="rounded-circle avatar-xl img-thumbnail mb-4 mx-auto d-block" alt="profile-image">
 
                     <form action="{{ route('profile.update', $user) }}" method="POST" role="form" enctype="multipart/form-data" class="form-horizontal">
