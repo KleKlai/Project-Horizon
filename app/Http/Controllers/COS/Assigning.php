@@ -30,39 +30,31 @@ class Assigning extends Controller
             'attorney_duedate'  =>  'required',
         ]);
 
-        // dd($request);
-
         if(empty($record->attorney()->pluck('attorney_id')->first()))
         {
-            // dd('empty');
             $attorney = Attorney::create([
                 'record_id'     => $record->id,
                 'attorney_id'   => $request->attorney,
                 'due_date'      => $request->attorney_duedate,
             ]);
-
             $record->update([
                 'status'        =>  'For Resolution',
                 'status_color'  =>  'info',
             ]);
-
             Maynard::systemNotification($request->attorney, \Auth::user()->name, $record->control_no . ' has been assign to you.');
-            \Session::flash('toastr_success', $record->control_no. ' has been assigned.');
-
+            Maynard::getSession('toastr_success', $record->control_no. ' has been assigned.');
         }
         else
         {
             $assign_attorney = Attorney::findOrFail($record->id);
-
             Maynard::systemNotification($assign_attorney->attorney_id, \Auth::user()->name, $record->control_no . ' has been reassigned.');
-
             $assign_attorney->update([
                 'attorney_id'      =>  $request->attorney,
                 'due_date'      =>  $request->attorney_duedate,
             ]);
 
             Maynard::systemNotification($request->attorney, \Auth::user()->name, $record->control_no . ' has been assign to you.');
-            \Session::flash('toastr_success', $record->control_no. ' case has been reassigned.');
+            Maynard::getSession('toastr_success', $record->control_no. ' case has been reassigned.');
         }
 
         return back();

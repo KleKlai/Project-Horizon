@@ -69,7 +69,7 @@ class RecordController extends Controller
             $record->addMedia(storage_path('tmp/uploads/' . $data))->toMediaCollection('document');
         }
 
-        \Session::flash('toastr_success', 'Record encoded successfully.');
+        Maynard::getSession('toastr_success', 'Record encoded successfully.');
 
         $user = Role::where('name', 'Chief of Staff')->first()->users()->get();
 
@@ -92,40 +92,6 @@ class RecordController extends Controller
         $attorney = Role::where('name', 'Lawyer')->first()->users()->get();
 
         return view('component.clerk.show', compact(['record', 'attorney']));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Model\Record  $record
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Record $record)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Model\Record  $record
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Record $record)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Model\Record  $record
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Record $record)
-    {
-        //
     }
 
     public function media(Request $request)

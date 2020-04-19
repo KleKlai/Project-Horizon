@@ -95,4 +95,31 @@ class Maynard
     {
         auth()->user()->unreadNotifications->where('id',$id)->markAsRead();
     }
+
+    public static function getSession(string $type, string $message)
+    {
+        \Session::flash($type, $message);
+    }
+
+    public static function file($request, $id)
+    {
+        if($id == 1) {
+            $filenameWithExt = $request->file('resolution')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file('resolution')->getClientOriginalExtension();
+            $fileNameToStore = $filename.'_'.time().'.'.$extension;
+            $path = $request->file('resolution')->storeAs('public/resolution', $fileNameToStore);
+
+            return $fileNameToStore;
+        } else if($id == 2)
+        {
+            $filenameWithExt = $request->file('profile')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file('profile')->getClientOriginalExtension();
+            $fileNameToStore = $filename.'_'.time().'.'.$extension;
+            $path = $request->file('profile')->storeAs('public/profile', $fileNameToStore);
+
+            return $fileNameToStore;
+        }
+    }
 }

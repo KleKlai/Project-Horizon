@@ -22,9 +22,7 @@ class Resolution extends Controller
 
         } else {
 
-            $record = Record::whereHas('attorney', function($q){
-                $q->where('attorney_id', Auth::user()->id);
-            })->get();
+            $record = Record::whereHas('attorney', function($q){$q->where('attorney_id', Auth::user()->id);})->get();
 
         }
 
@@ -39,7 +37,7 @@ class Resolution extends Controller
 
         if(empty($record->attorney['id']))
         {
-            \Session::flash('swal_info', 'Could not upload until no attorney is assigned.');
+            Maynard::getSession('swal_info', 'Could not upload until no attorney is assigned.');
             return back();
         }
 
@@ -53,21 +51,12 @@ class Resolution extends Controller
             if(\Storage::exists('public/resolution/'.$record->resolution['attachment'])){
                 \Storage::delete('public/resolution/'.$record->resolution['attachment']);
             }else{
-                Session::flash('error', $record->resolution['attachment'] . ' doesnt exist.');
+                Maynard::getSession('error', $record->resolution['attachment'] . ' doesnt exist.');
             }
 
         }
 
-        $filenameWithExt = $request->file('resolution')->getClientOriginalName();
-
-        // Get just filename
-        $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-        // Get just ext
-        $extension = $request->file('resolution')->getClientOriginalExtension();
-        // Filename to Store
-        $fileNameToStore = $filename.'_'.time().'.'.$extension;
-        //Upload the file
-        $path = $request->file('resolution')->storeAs('public/resolution', $fileNameToStore);
+        $fileNameToStore = Maynard::file($request, 1);
 
         if(!empty($record->resolution['id']))
         {
@@ -104,10 +93,7 @@ class Resolution extends Controller
             'status'        =>  'For Review',
             'status_color'  =>  'purple',
         ]);
-
-        \Session::flash('toastr_success', 'Resolution submitted successfully.');
-
-
+        Maynard::getSession('toastr_success', 'Resolution submitted successfully.');
         return back();
     }
 

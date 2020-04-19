@@ -26,13 +26,13 @@ class Validation extends Controller
 
         if(empty($record->attorney['id']))
         {
-            \Session::flash('swal_info', 'Could not approved until no attorney is assigned.');
+            Maynard::getSession('swal_info', 'Could not approved until no attorney is assigned.');
             return back();
         }
 
         if(empty($record->resolution['id']))
         {
-            \Session::flash('swal_info', 'Could not approved until no resolution is submitted.');
+            Maynard::getSession('swal_info', 'Could not approved until no resolution is submitted.');
             return back();
         }
 
@@ -41,7 +41,7 @@ class Validation extends Controller
             'status_color'    =>  'info',
         ]);
 
-        \Session::flash('toastr_success', $record->control_no .' has been approved.');
+        Maynard::getSession('toastr_success', $record->control_no .' has been approved.');
 
         $user = Role::where('name', 'Chief of Staff')->first()->users()->get();
 
@@ -59,13 +59,13 @@ class Validation extends Controller
 
         if(empty($record->attorney['id']))
         {
-            \Session::flash('swal_info', 'Could not disapproved until no attorney is assigned.');
+            Maynard::getSession('swal_info', 'Could not disapproved until no attorney is assigned.');
             return back();
         }
 
         if(empty($record->resolution['id']))
         {
-            \Session::flash('swal_info', 'Could not disapproved until no resolution is submitted.');
+            Maynard::getSession('swal_info', 'Could not disapproved until no resolution is submitted.');
             return back();
         }
 
@@ -75,7 +75,7 @@ class Validation extends Controller
             'disapproved_remark'    =>  $request->disapproved_remarks,
         ]);
 
-        \Session::flash('toastr_warn', $record->control_no .' has been disapproved.');
+        Maynard::getSession('toastr_warn', $record->control_no .' has been disapproved.');
 
         $user = Role::where('name', 'Chief of Staff')->first()->users()->get();
 

@@ -32,7 +32,7 @@ Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::resource('users', 'SysAdmin\UserController');
 Route::get('log', 'SysAdmin\UtilitiesController@activityLog')->name('log.index')->middleware('password.confirm');
 
-Route::resource('record', 'RecordController');
+Route::resource('record', 'RecordController', ['except' => 'edit', 'update', 'delete']);
 Route::post('record/media', 'RecordController@media')->name('record.media');
 
 Route::get('cos/index', 'COS\Assigning@index')->name('cos.index');

@@ -7,6 +7,7 @@ use App\User;
 use App\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use App\Maynard\Maynard;
 
 class UserController extends Controller
 {
@@ -55,16 +56,8 @@ class UserController extends Controller
 
         if($request->hasFile('profile')){
 
-            $filenameWithExt = $request->file('profile')->getClientOriginalName();
+            $fileNameToStore = Maynard::file($request, 2);
 
-            // Get just filename
-            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            // Get just ext
-            $extension = $request->file('profile')->getClientOriginalExtension();
-            // Filename to Store
-            $fileNameToStore = $filename.'_'.time().'.'.$extension;
-            //Upload the file
-            $path = $request->file('profile')->storeAs('public/profile', $fileNameToStore);
         }else{
             $fileNameToStore = 'default-avatar.png';
         }
@@ -77,32 +70,13 @@ class UserController extends Controller
         ]);
 
         $user->roles()->attach($request->role);
-
-        \Session::flash('toastr_success', $request->name . ' has been created successfully.');
+        Maynard::getSession('toastr_success', $request->name . ' has been created successfully.');
         return redirect(route('users.index'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function show(User $user)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
     public function edit(User $user)
     {
         $role = Role::all();
-
         return view('component.admin.usermanagement.edit', compact(['role', 'user']));
     }
 
@@ -138,16 +112,7 @@ class UserController extends Controller
                 }
             }
 
-            $filenameWithExt = $request->file('profile')->getClientOriginalName();
-
-            // Get just filename
-            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            // Get just ext
-            $extension = $request->file('profile')->getClientOriginalExtension();
-            // Filename to Store
-            $fileNameToStore = $filename.'_'.time().'_'.$user->id.'.'.$extension;
-            //Upload the file
-            $path = $request->file('profile')->storeAs('public/profile', $fileNameToStore);
+            Maynard::file($request, 2);
         }else{
             $fileNameToStore = $user->profile;
         }
@@ -160,7 +125,7 @@ class UserController extends Controller
 
         $user->roles()->sync($request->role);
 
-        \Session::flash('toastr_success', 'Profile Updated Successfully.');
+        Maynard::getSession('toastr_success', 'Profile Updated Successfully.');
 
         return back();
     }
@@ -177,7 +142,7 @@ class UserController extends Controller
 
         $user->delete();
 
-        \Session::flash('toastr_success', $user->name . ' deleted successfully');
+        Maynard::getSession('toastr_success', $user->name . ' deleted successfully');
         return back();
     }
 }
